@@ -1,0 +1,31 @@
+{
+  "name": "prayeranalysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "debug": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MengxiQ/prayerAnalysis.git"
+  },
+  "keywords": [
+    "Proto-God"
+  ],
+  "author": "MengxiQ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MengxiQ/prayerAnalysis/issues"
+  },
+  "homepage": "https://github.com/MengxiQ/prayerAnalysis#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "koa": "^2.13.4",
+    "koa-route": "^3.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
