@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "debug": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,9 @@
   },
   "homepage": "https://github.com/MengxiQ/prayerAnalysis#readme",
   "dependencies": {
-    "koa": "^2.13.4"
+    "axios": "^0.27.2",
+    "koa": "^2.13.4",
+    "koa-route": "^3.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
