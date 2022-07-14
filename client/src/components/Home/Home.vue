@@ -1,59 +1,56 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="labels">
-        <Tag type="primary" size="large">总数卡数：{{ data.total }}</Tag>
-        <Tag type="primary" size="large" v-if="data.hitList">五星：{{ data.hitList.length }}</Tag>
-        <Tag type="primary" size="large">已垫：{{ data.bedding }}</Tag>
+  <div class="container">
+    <InputTab v-show="activeTab === 'input'" @message="onMessage">
+      <van-cell v-if="results" title="历史记录" icon="underway-o" @click="history" is-link/>
+    </InputTab>
+    <div v-if="results" v-show="activeTab === 'result'" >
+      <div class="bar">
+        <van-icon name="arrow-left" @click="goBack" />
       </div>
-      <div class="stage">
-        <van-badge v-for="(ele, index) in data.hitList" :key="index" position="top-left" >
-          <div class="role" >
-            <VanImage width="80"
-                      height="80"
-            ></VanImage>
-            <div>
-              <span style="font-size: smaller">{{ ele.name }}</span>
-            </div>
-          </div>
-          <template #content>
-            <div>{{ele.cost}}</div>
-          </template>
-        </van-badge>
-
-      </div>
+      <ResultTab :result="results.activeRole" title="活动角色祈愿"></ResultTab>
+      <ResultTab :result="results.activeWeapons" title="活动武器祈愿"></ResultTab>
+      <ResultTab :result="results.resident" title="常驻祈愿"></ResultTab>
+      <ResultTab :result="results.greenhorn" title="新手祈愿"></ResultTab>
     </div>
+
   </div>
 </template>
 
 <script setup>
-import axios from 'axios'
-import {Tag} from 'vant'
-import { Badge } from 'vant';
-import {Image as VanImage} from 'vant';
-import {ref} from "vue";
-
-const data = ref({})
-const getData = async () => {
-  const res = await axios.get('/be/home')
-  data.value = res.data
+import InputTab from './InputTab.vue'
+import ResultTab from './ResultTab.vue'
+import {reactive, ref, toRefs} from "vue";
+const activeTab = ref('input')
+const results = ref(null)
+const onMessage = (data) => {
+  results.value = data
+  activeTab.value = 'result'
 }
-getData()
+
+const goBack = () => {
+  activeTab.value = 'input'
+}
+const history = () => {
+  activeTab.value = 'result'
+}
 </script>
 
-<style lang="scss" scoped>
-.card {
-  .labels {
-    & > * {
-      margin-right: 10px;
-    }
-  }
-  .stage{
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
+<style scoped>
+.container {
+  background: aliceblue;
+  height: calc(100vh - 20px);
+  width: calc(100vw - 20px);
+  padding: 10px;
+  overflow-x: hidden;
 }
-
+.bar{
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.44);
+  color: white;
+  border-radius: 5px;
+}
 </style>
